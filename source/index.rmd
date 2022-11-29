@@ -1,0 +1,50 @@
+---
+title: "Inequality Within US Prisons"
+author: "Nathan Lee"
+date: '2022-11-20'
+output: html_document
+---
+
+```{r echo=FALSE, eval=TRUE, message=FALSE}
+source('/Users/nathanlee/Documents/info201/assignments/a4-nlee777/source/analysis.R')
+```
+
+## Abstract
+I analyzed data from the Incarceration Trends Dataset which contains County-level data from 1970-2018 and State-level data from 2019-2021. This dataset consists of information gathered from the Annual Survey of Jails (ASJ) and Census of Jails (COJ), both of which are data collections from the Bureau of Justice Statistics. The dataset includes information about incarceration demographics based on variables such as gender, race, date, and location. In this report, I explore potential inequalities in within the U.S. prison system.
+
+## Section 1: Introduction
+Systemic discrimination is still prevalent within America. It is not limited to isolated instances of bias, but rather, it is deeply ingrained into our legal systems and institutions. The US prison system is one example of how systemic discrimination takes a foothold within the structures of our society. Moreover, generational incarceration keeps families of color trapped in a cycle of incarceration. In this report, I analyze US prison data in order to expose patterns that suggest that our prison system exacerbates this discrimination. Direct stakeholders impacted by research into this dataset include people within my immediate sphere of influence—I find it exciting to share my findings for these sorts of projects so people I directly interact with will likely interact with this research themselves. Indirect stakeholders include prison inmates, local political representatives, and US taxpayers. I mostly aim to answer questions regarding the existence of disparities in incarceration based on gender and race.
+
+## Section 2: Data Summary
+My approach to this dataset is to compare the incarceration of a population with its respective subset. (i.e. comparing "male incarceration" to "white male incarceration"). This will allow me to identify which factors contribute to higher rates of incarceration. I collected a number of values to help me with this; for example, I was able to find that of all female prisoners, **`r get_black_female_prison_ratio()`%** on average were black. This is significant because although black females do not account for nearly half of the US' population, they account for half of the female prison population on average. This can indicate a pattern of of inequality. Similarly, only **`r get_white_female_prison_ratio()`%** of total females in prison are white on average. This number is closer to the actual percentage of white people in the US as a whole. It's worth noting that these values do not add up to 100% since they are only calculated by averages. I was also interested in looking into another minority group's incarceration statistics and found that latinx males account for **`r get_latinx_male_prison_ratio()`%** of incarcerated males on average. Such statistics indicate that people of color are incarcerated at higher rates.
+
+
+## Section 3: Growth of the US Prison Population
+```{r s3, echo=FALSE, message=FALSE}
+plot_jail_pop_for_us()
+```
+\
+In this chart, it is apparent that there is an extremely steady increase in overall prison population that starts in the late 1970s and starts to decline slightly before moving into the 2010s. This isn't very surprising, considering that the increase starts around the same time as the "war on drugs." **One question I have about this pattern is which policies resulted in the decreased rate of change going into the early 2010s**
+
+## Section 4: Growth of Prison Pouplation by State
+
+```{r s4, echo=FALSE, message=FALSE}
+plot_pop_by_states(c("WA", "VA", "NY", "HI"))
+```
+\
+I chose to analyze Washington, Virginia, New York, and Hawaii since they provide a diverse spread of states in terms of physical region along with political groundings. The chart shows that 3 out of the 4 states (excluding Hawaii) show rapid growth in prison population from the 1970s through the first decade of the 2000s. Virginia and Washington's prison population continues to grow past the first decade of the 2000s. Hawaii has stayed relatively flat throughout the chart. By the end of the chart, all states have either hit a plateau or are decreasing. One question I have is which policies caused New York's prison population to decrease earlier than Washington and Virginia's?
+
+
+## Section 5: Gender Comparison that reveals potential patterns of inequality
+```{r s5, echo=FALSE, message=FALSE}
+plot_male_female_pop() 
+```
+This chart helps answer the question, "Is a particular gender over represented in US prisons?" From the chart, we see that males are significantly over represented in US prisons when compared to females. Although the prison population for both genders is currently decreasing, the male prison population remains substantially higher than the female prison population. In 2018, there were over 5 times more males in US prisons than females. 
+
+## Section 6: Potential Patterns of Inequality that Vary Geographically
+```{r s6, echo=FALSE, message=FALSE}
+library(maps)
+plot_2016_us() 
+```
+\
+In this map, I aimed to answer the question of how inequality might be demonstrated by the distribution of incarcerated latinx people throughout the US. From the map, we see that the some areas with the highest numbers of incarcerated latinx people are in California and Texas, which are two states bordering Mexico. Although this map doesn't show the proportions of latinx population to incarceration population (the rate), it still reveals the clear disparity in raw latinx incarceration populations. One question I have is what factors contribute to high latinx incarceration in these states?
